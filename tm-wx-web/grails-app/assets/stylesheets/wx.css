@@ -1,0 +1,32 @@
+.table td, .table th {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+*, ::after, ::before {
+    box-sizing: border-box;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+table {
+    border-collapse: collapse;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+.level-exam {
+    padding: 6px 12px;
+}

@@ -1,0 +1,31 @@
+.weui-cell {
+    background: #e1eae9;
+    margin: 2px 0;
+}
+
+.weui-cell__hd {
+    background: #699a95;
+    border-radius: 5px;
+    color: white;
+}
+
+.weui-label {
+    text-align: center;
+}
+
+.weui-cell__bd {
+    margin-left: 5px;
+}
+
+.weui-input {
+    background: #fbfdfd;
+    border-radius: 2px;
+}
+
+.weui-btn_primary {
+    background-color: #699a95;
+}
+
+.weui-cell__ft {
+    margin-left: 5px;
+}
