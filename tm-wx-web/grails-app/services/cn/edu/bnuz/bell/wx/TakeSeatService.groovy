@@ -11,6 +11,11 @@ class TakeSeatService {
     def save(String openId,  SeatCommand cmd) {
         def user = CetTeacher.findByOpenId(openId)
         if (user) {
+            // 禁止当次不排考的老师扫码占座
+            def cet_room = CetTeacherRoom.findByCetTeacher(user)
+            if (!cet_room) {
+                return '您不是本次监考，请在无二维码标签处就坐。'
+            }
             // 禁止多占座
             def activity = Activities.load(cmd.activityId)
             def s = Seat.findByUserAndActivity(user, activity)
