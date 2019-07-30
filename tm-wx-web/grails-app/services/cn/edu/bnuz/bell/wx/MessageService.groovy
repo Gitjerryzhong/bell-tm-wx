@@ -3,6 +3,7 @@ package cn.edu.bnuz.bell.wx
 import cn.edu.bnuz.bell.util.ImageMsg
 import cn.edu.bnuz.bell.util.TextMsg
 import grails.gorm.transactions.Transactional
+import org.apache.commons.lang3.time.DateUtils
 
 @Transactional
 class MessageService {
@@ -44,12 +45,9 @@ class MessageService {
     }
 
     def getActiveWord(TextMsg msg) {
-        def now = new Date()
-        def lastMinute = now[Calendar.MINUTE] - 20
-        now.set(minute: lastMinute)
         def result = Words.executeQuery'''
 select word from Words where openId = :openId and dateCreated > :deadLine and activited is true order by dateCreated desc
-''', [openId: msg.fromUserName, deadLine: now], [max: 1]
+''', [openId: msg.fromUserName, deadLine: DateUtils.addMinutes(new Date(), -20)], [max: 1]
         return result ? result[0] : null
     }
 
