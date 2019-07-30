@@ -8,7 +8,7 @@ class TextMsg extends Msg{
         xml.xml(){
             ToUserName(fromUserName)
             FromUserName(toUserName)
-            CreateTime(new Date().timeString)
+            CreateTime(new Date())
             MsgType(msgType)
             Content(content)
         }
