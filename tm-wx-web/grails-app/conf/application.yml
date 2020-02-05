@@ -153,5 +153,5 @@ bell:
                 - et
     wxValidateFile: 'D:\temp\tm'
     host: 'http://es-test.bnuz.edu.cn'
-    appId: 'wx805948bb286e411a'
-    appSecret: 'd3af956bd82abdf5574a26f37859b803'
+    appId: 'wxcc06efab1205b051'
+    appSecret: '64676572a6a02a8bf5f124f9516fdaee'

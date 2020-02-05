@@ -63,4 +63,33 @@ order by createdTime desc
             }
         }
     }
+
+    def saveJsApiTicket(String accessToken, String ticket) {
+        if (!accessToken) {
+            throw new BadHttpRequest()
+        }
+        def item = new JsApiTicket(
+                token: accessToken,
+                expiresIn: 7200,
+                ticket: ticket,
+                createdTime: new Date().time
+        )
+        if (!item.save()) {
+            item.errors.each {
+                println it
+            }
+        }
+    }
+
+    def findTicketByToken(String accessToken) {
+        def tickets = JsApiTicket.executeQuery'''
+select ticket
+from JsApiTicket 
+where token = :token and createdTime > :currentTime - expiresIn *1000
+order by createdTime desc
+''', [token: accessToken, currentTime: new Date().time], [max: 1]
+        if (tickets) {
+            return tickets[0]
+        }
+    }
 }

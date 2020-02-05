@@ -79,6 +79,9 @@ class AuthTokenController {
         } else if (type == 'image') {
             msg = messageService.getImageMsg(xml)
             render msg.send()
+        } else if (type == 'voice') {
+            msg = messageService.getVoiceMsg(xml)
+            render msg.send()
         } else {
             msg = messageService.getTextMsg(xml)
             msg.content = '感谢您的留言！'

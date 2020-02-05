@@ -23,6 +23,11 @@ class Menu {
                     "type": "view",
                     "name": "教师入口",
                     "url": "http://es-test.bnuz.edu.cn/teacher-menu"
+                },
+                {
+                    "type": "view",
+                    "name": "测试",
+                    "url": "http://es-test.bnuz.edu.cn/test-menu"
                 }
             ]
         },

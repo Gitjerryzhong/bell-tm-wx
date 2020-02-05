@@ -11,6 +11,19 @@ class UrlMappings {
         "500"(view:'/error')
         "404"(view:'/notFound')
 
+        "/config"(resources: 'config', includes: ['index', 'save'])
+        "/voiceKeeper"(resources: 'voiceKeeper', includes: ['index', 'save'])
+        "/newFire"(resources: 'newFire', includes: ['index'])
+        "/register"(resources: 'register')
+        "/theme"(resources: 'theme')
+        "/talking"(resources: 'talking') {
+            collection {
+                "/search"(controller: 'talking', action: 'search', method: 'GET')
+            }
+        }
+        "/test-menu"(view:"/test-info")
+
+
         "/authTokens"(resources: 'authToken', includes: ['index', 'save'])
         "/student"(resources: 'student', includes: ['index'])
         "/teacher"(resources: 'teacher', includes: ['index'])

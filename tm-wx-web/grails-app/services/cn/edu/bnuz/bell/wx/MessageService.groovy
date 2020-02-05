@@ -2,6 +2,7 @@ package cn.edu.bnuz.bell.wx
 
 import cn.edu.bnuz.bell.util.ImageMsg
 import cn.edu.bnuz.bell.util.TextMsg
+import cn.edu.bnuz.bell.util.VoiceMsg
 import grails.gorm.transactions.Transactional
 import org.apache.commons.lang3.time.DateUtils
 
@@ -32,6 +33,27 @@ class MessageService {
                 picUrl: webData.PicUrl.text(),
                 mediaId: webData.MediaId.text()
         )
+    }
+
+    def getVoiceMsg(webData) {
+        return new VoiceMsg(
+                toUserName: webData.ToUserName.text(),
+                fromUserName: webData.FromUserName.text(),
+                msgType: webData.MsgType.text(),
+                createTime: webData.CreateTime.text(),
+                msgId: webData.MsgId.text(),
+                mediaId: webData.MediaId.text()
+        )
+        // 需要在开发者里打开语言识别功能
+//        println webData.Recognition.text()
+//        return new TextMsg(
+//                toUserName: webData.ToUserName.text(),
+//                fromUserName: webData.FromUserName.text(),
+//                msgType: 'text',
+//                createTime: webData.CreateTime.text(),
+//                msgId: webData.MsgId.text(),
+//                content: webData.Recognition.text()
+//        )
     }
 
     def log(TextMsg msg) {
