@@ -23,5 +23,9 @@
     <span class="icon iconfont icon-edu-fenshu"></span>
     <div class="name">等级考试</div>
 </a>
+<a href="http://jwcwx.bnuz.edu.cn/student?act=delay" class="third">
+    <span class="icon iconfont icon-zhiduchaxun"></span>
+    <div class="name">文件打印申请</div>
+</a>
 </body>
 </html>

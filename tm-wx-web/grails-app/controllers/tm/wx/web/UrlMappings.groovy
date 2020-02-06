@@ -4,6 +4,7 @@ class UrlMappings {
 
     static mappings = {
         "/message"(view:"/message")
+        "/reportList"(view:"/reportList")
         "/info"(view:"/info")
         "/student-menu"(view:"/student-info")
         "/teacher-menu"(view:"/teacher-info")
@@ -16,6 +17,11 @@ class UrlMappings {
         "/teacher"(resources: 'teacher', includes: ['index'])
         "/bindUser"(resources: 'bindUser')
         "/bindCetUser"(resources: 'bindCetUser')
+        "/delay"(resources: 'delay') {
+            collection {
+                "/remove"(controller: 'delay', action: 'remove', method: 'GET')
+            }
+        }
         "/bindNewPhone"(resources: 'bindNewPhone')
         "/score"(resources: 'score', includes: ['index'])
         "/levelExam"(resources: 'levelExam', includes: ['index'])

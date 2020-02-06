@@ -19,7 +19,11 @@ class BindUserService {
             if (!User.findByOpenId(cmd.openId) && !User.get(cmd.studentId)) {
                 User user = new User(openId: cmd.openId, phone: cmd.phone, dateCreated: new Date())
                 user.id = cmd.studentId
-                user.save()
+                if(!user.save()) {
+                    user.errors.each {
+                        println it
+                    }
+                }
                 return 'OK'
             } else {
                 return 'DUPLICATE'
