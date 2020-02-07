@@ -21,6 +21,7 @@ class TalkingController {
     }
 
     def save(TalkingCommand cmd) {
+        println cmd.content
         render(talkingService.save(cmd) as JSON)
     }
 

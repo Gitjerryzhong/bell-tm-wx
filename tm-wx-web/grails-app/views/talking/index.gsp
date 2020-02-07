@@ -35,8 +35,16 @@
 </g:if>
 <g:if test="talking.permission.speakAble">
     <div class="footer">
-        <g:textArea name="content" id="content" rows="4"/>
-        <button class="weui-btn weui-btn_mini weui-btn_primary" id="ok">确定</button>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell ">
+                <div class="weui-cell__bd">
+                    <textarea class="weui-textarea" rows="2" id="content"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area">
+            <input class="weui-btn weui-btn_primary" type="button" value="发送" id="ok">
+        </div>
     </div>
 </g:if>
 <asset:javascript src="application.js"/>
