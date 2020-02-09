@@ -22,9 +22,6 @@
             ${user.name}
         </div>
         <input type="hidden" id="openId" value="${openid}">
-        <input type="hidden" id="sealValue" value="${user.seal}">
-        <input type="hidden" id="sealCommentValue" value="${user.sealComment}">
-        <input type="hidden" id="addressValue" value="${user.address}">
     </div>
 
     <div class="weui-form__control-area">

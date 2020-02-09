@@ -1,4 +1,4 @@
-var types = [{id: 'sl1', label: '毕业生专用成绩单'},
+var types = [ //{id: 'sl1', label: '毕业生专用成绩单'},
     {id: 'sl2', label: '毕业证明'},
     {id: 'sl3', label: '毕业证明（第二专业）'},
     {id: 'sl4', label: '毕业证明（辅修）'},
@@ -12,20 +12,61 @@ var types = [{id: 'sl1', label: '毕业生专用成绩单'},
     {id: 'sl12', label: '在校证明（合作办学）'},
     {id: 'sl13', label: '中文成绩单（辅修）'},
     {id: 'sl14', label: '中文成绩单（主修）'},
-    {id: 'sl15', label: '4分制成绩单'},
+    {id: 'sl15', label: '4分制成绩单（合作办学）'},
     {id: 'sl16', label: 'CET4等级成绩证明'},
     {id: 'sl17', label: 'CET6等级成绩证明'}];
 var template = "<option value=\"${typeLabel}\">${typeLabel}</option>\n";
+$.get("/delay/getUserInfo",
+    {
+        openId: $("#openId").val(),
+    },
+    function(data, status) {
+        if (status === 'success') {
+            var html = "<select class=\"weui-select\" name=\"type\" id=\"type\">\n";
+            types.forEach(function (item) {
+                var selectAble = false;
+                if (item.label.indexOf('辅修') >= 0) {
+                    if (data.minor) {
+                        selectAble = true;
+                    }
+                } else if (item.label.indexOf('合作办学') >= 0) {
+                    if (data.abroad) {
+                        selectAble = true;
+                        if (item.label === '在校证明（合作办学）') {
+                            if (!data.atSchool) {
+                                selectAble = false;
+                            }
+                        }
+                    }
+                } else if (item.label.indexOf('毕业') >= 0) {
+                    if (!data.atSchool) {
+                        selectAble = true;
+                    }
+                } else if (item.label === '在校证明' || item.label === '假期证明') {
+                    if (data.atSchool) {
+                        selectAble = true;
+                    }
+                } else {
+                    console.log(item.label);
+                    selectAble = true;
+                }
+                if (selectAble) {
+                    html += template.replace("${typeLabel}", item.label).replace("${typeLabel}", item.label);
+                }
 
-var html = "<select class=\"weui-select\" name=\"type\" id=\"type\">\n";
-types.forEach(function (item) {
-    html += template.replace("${typeLabel}", item.label).replace("${typeLabel}", item.label);
-});
-html += "</select>\n";
-$('#typeView')[0].innerHTML = html;
-$('#seal').prop("checked", $("#sealValue").val() ? true : false);
-$('#sealComment').val($("#sealCommentValue").val());
-$('#address').val($("#addressValue").val());
+            });
+            html += "</select>\n";
+            $('#typeView')[0].innerHTML = html;
+        } else {
+            alert("网络错误！");
+        }
+    });
+
+
+
+// $('#seal').prop("checked", $("#sealValue").val() ? true : false);
+// $('#sealComment').val($("#sealCommentValue").val());
+// $('#address').val($("#addressValue").val());
 $('#ok').on('click', function(event){
     var type =  $("#type").val();
     var ps = $("#ps").val();

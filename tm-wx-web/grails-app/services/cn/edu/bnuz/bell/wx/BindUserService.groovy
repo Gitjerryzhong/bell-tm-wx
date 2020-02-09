@@ -2,6 +2,7 @@ package cn.edu.bnuz.bell.wx
 
 import cn.edu.bnuz.bell.cmd.UserCommand
 import cn.edu.bnuz.bell.wx.dv.DvUser
+import cn.edu.bnuz.bell.wx.eto.StudentEto
 import grails.gorm.transactions.Transactional
 import javassist.tools.web.BadHttpRequest
 
@@ -11,7 +12,12 @@ class BindUserService {
     static final Map Hint = [1: [label: '教师工号', placeholder: '请输入教师工号', root: 'teacher-menu'],
                              2: [label: '学号', placeholder: '请输入学号', root: 'student-menu']]
     def auth(UserCommand cmd) {
-        DvUser.findByIdAndPassword(cmd.studentId, cmd.password)
+        if (DvUser.findByIdAndPassword(cmd.studentId, cmd.password)) {
+            return true
+        } else {
+            return StudentEto.findByIdAndPassword(cmd.studentId, cmd.password ) ? true : false
+        }
+
     }
 
     def bind(UserCommand cmd) {

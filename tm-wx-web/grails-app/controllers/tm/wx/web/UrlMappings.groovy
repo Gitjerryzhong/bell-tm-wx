@@ -20,6 +20,7 @@ class UrlMappings {
         "/delay"(resources: 'delay') {
             collection {
                 "/remove"(controller: 'delay', action: 'remove', method: 'GET')
+                "/getUserInfo"(controller: 'delay', action: 'getUserInfo', method: 'GET')
             }
         }
         "/bindNewPhone"(resources: 'bindNewPhone')

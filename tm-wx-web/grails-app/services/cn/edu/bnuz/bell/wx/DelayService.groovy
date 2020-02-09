@@ -2,8 +2,13 @@ package cn.edu.bnuz.bell.wx
 
 import cn.edu.bnuz.bell.cmd.ReportCommand
 import cn.edu.bnuz.bell.wx.dv.DvUser
+import cn.edu.bnuz.bell.wx.eto.StudentAbroadEto
+import cn.edu.bnuz.bell.wx.eto.StudentMinorEto
 import grails.gorm.transactions.Transactional
 import javassist.tools.web.BadHttpRequest
+import cn.edu.bnuz.bell.wx.eto.StudentEto
+
+import java.time.LocalDate;
 
 @Transactional
 class DelayService {
@@ -12,7 +17,6 @@ class DelayService {
         def result = PostInfo.executeQuery'''
 select new map(
 u.id as userId,
-du.name as name,
 u.phone as phone1,
 i.phone as phone2,
 i.seal as seal,
@@ -20,11 +24,21 @@ i.sealComment as sealComment,
 i.address as address
 )
 from PostInfo i
-right join i.user u,
-DvUser du
-where u.openId = :openId and du.id = u.id
+right join i.user u
+where u.openId = :openId
 ''', [openId: openId]
-        return result ? result[0] : []
+        if (result) {
+            def dvUser = DvUser.findById(result[0].userId)
+            def stdEto = StudentEto.findById(result[0].userId)
+            result[0]['name'] = dvUser ? dvUser.name : stdEto?.name
+            result[0]['atSchool'] = stdEto?.atSchool == '是' && stdEto?.enroll == '有'
+            def stdMinor = StudentMinorEto.findById(result[0].userId)
+            def stdAbroad = StudentAbroadEto.findById(result[0].userId)
+            result[0]['minor'] = stdMinor ? true : false
+            result[0]['abroad'] = stdAbroad ? true : false
+            return result[0]
+        }
+        return [:]
     }
 
     def create(ReportCommand cmd) {
@@ -100,10 +114,14 @@ order by r.type, r.id
     }
 
     def listAll() {
+        def date = LocalDate.now()
+        def lastSaturday = date.plusDays(-(date.dayOfWeek.value + 1))
+        if (date.dayOfWeek.value == 6) {
+            lastSaturday = date.plusDays(-(date.dayOfWeek.value + 2))
+        }
         def result = Report.executeQuery'''
 select distinct new map(
 u.id as userId,
-du.name as name,
 i.phone as phone,
 i.seal as seal,
 i.sealComment as sealComment,
@@ -111,17 +129,19 @@ i.address as address
 )
 from Report r
 join r.user u 
-join u.postInfo i,
-DvUser du
-where to_char(r.dateCreated, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and du.id = u.id
-'''
+join u.postInfo i
+where r.dateCreated between to_date(:lastSaturday, 'YYYY-MM-DD') and to_date(:date, 'YYYY-MM-DD')
+''', [lastSaturday: lastSaturday.toString(), date: date.toString()]
         result.each {item ->
-            item['reports'] = findAllReportByUser(item.userId)
+            def dvUser = DvUser.findById(item.userId)
+            def stdEto = StudentEto.findById(item.userId)
+            item['name'] = dvUser ? dvUser.name : stdEto?.name
+            item['reports'] = findAllReportByUser(item.userId, lastSaturday, date)
         }
         return result
     }
 
-    def findAllReportByUser(String userId) {
+    def findAllReportByUser(String userId, LocalDate lastSaturday, LocalDate date) {
         Report.executeQuery'''
 select distinct new map(
 r.id as id,
@@ -130,7 +150,8 @@ r.ps as ps
 )
 from Report r
 join r.user u 
-where to_char(r.dateCreated, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') and u.id = :userId
-''', [userId: userId]
+where r.dateCreated between to_date(:lastSaturday, 'YYYY-MM-DD') and to_date(:date, 'YYYY-MM-DD') and u.id = :userId
+''', [userId: userId, lastSaturday: lastSaturday.toString(), date: date.toString()]
     }
+
 }

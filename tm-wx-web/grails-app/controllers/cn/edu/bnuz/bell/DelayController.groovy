@@ -31,4 +31,9 @@ class DelayController {
     def remove(String openId, Long id) {
         render ([state: delayService.remove(openId, id), list: delayService.list(openId)] as JSON)
     }
+
+    def getUserInfo(String openId) {
+        println openId
+        render(delayService.getUserInfo(openId) as JSON)
+    }
 }
