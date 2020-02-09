@@ -23,5 +23,9 @@
     <span class="icon iconfont icon-zhiduchaxun"></span>
     <div class="name">办事指南</div>
 </a>
+<a href="https://mp.weixin.qq.com/s/7nkAPwGi__EwRjcQS_3PRQ#wechat_redirect" class="self">
+    <span class="icon iconfont icon-bangding1"></span>
+    <div class="name">联系方式</div>
+</a>
 </body>
 </html>

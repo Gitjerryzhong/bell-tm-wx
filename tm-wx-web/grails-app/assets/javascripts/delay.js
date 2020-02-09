@@ -57,16 +57,16 @@ $.get("/delay/getUserInfo",
             });
             html += "</select>\n";
             $('#typeView')[0].innerHTML = html;
+
+            $('#seal').prop("checked", data.seal);
+            $('#sealComment').val(data.sealComment);
+            $('#address').val(data.address);
         } else {
             alert("网络错误！");
         }
     });
 
 
-
-// $('#seal').prop("checked", $("#sealValue").val() ? true : false);
-// $('#sealComment').val($("#sealCommentValue").val());
-// $('#address').val($("#addressValue").val());
 $('#ok').on('click', function(event){
     var type =  $("#type").val();
     var ps = $("#ps").val();
