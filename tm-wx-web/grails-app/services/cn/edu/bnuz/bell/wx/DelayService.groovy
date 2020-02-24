@@ -116,9 +116,9 @@ order by r.type, r.id
     def listAll() {
         def date = LocalDate.now()
         def lastSaturday = date.plusDays(-(date.dayOfWeek.value + 1))
-        if (date.dayOfWeek.value == 6) {
-            lastSaturday = date.plusDays(-(date.dayOfWeek.value + 2))
-        }
+//        if (date.dayOfWeek.value == 6) {
+//            lastSaturday = date.plusDays(-(date.dayOfWeek.value + 2))
+//        }
         def result = Report.executeQuery'''
 select distinct new map(
 u.id as userId,
