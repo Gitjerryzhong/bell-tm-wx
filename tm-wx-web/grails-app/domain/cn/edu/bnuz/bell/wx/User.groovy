@@ -10,7 +10,7 @@ class User {
      */
     String phoneUsed
 
-
+    static hasOne = [postInfo: PostInfo]
     static mapping = {
         table schema: 'tm_wx'
         id      generator: 'assigned', length: 10, comment: '用户ID'
@@ -22,5 +22,6 @@ class User {
 
     static constraints = {
         phoneUsed nullable: true
+        postInfo nullable: true
     }
 }

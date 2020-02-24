@@ -10,7 +10,7 @@ class ScoreEto {
     String courseName
     String credit
     String score
-    Integer scoreNumber
+    BigDecimal scoreNumber
 
     static mapping = {
         table       name: 'et_score', schema: 'tm_wx'

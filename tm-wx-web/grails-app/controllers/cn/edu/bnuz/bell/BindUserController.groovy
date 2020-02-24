@@ -12,9 +12,8 @@ class BindUserController {
 
     def index(String code, Integer userType) {
         def openid = authService.findOpenId(code)
-        println openid
         if (bindUserService.checkOpenId(openid)) {
-            render view:"/message", model: [message: "您已绑定，无需重复操作！"]
+            render (view: "/message", model: [message: "您已绑定，无需重复操作！"])
         } else {
             return([openid: openid, sms: authService.smsHost, hint: bindUserService.Hint[userType]])
         }

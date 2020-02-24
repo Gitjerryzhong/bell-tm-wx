@@ -28,6 +28,9 @@ class StudentController {
             case 'bindNewPhone':
                 backUrl = "${host}/bindNewPhone?userType=2"
                 break
+            case 'delay':
+                backUrl = "${host}/delay"
+                break
             default:
                 render status: HttpStatus.BAD_REQUEST
         }
