@@ -24,11 +24,13 @@
         <input type="hidden" id="openId" value="${openid}">
     </div>
 
+
+
     <div class="weui-form__control-area">
         <div class="weui-cells__group weui-cells__group_form">
             <div class="weui-cell weui-cell_active weui-cell_select weui-cell_select-after">
                 <div class="weui-cell__hd">
-                    <label for="type" class="weui-label">文件类型</label>
+                    <label class="weui-label">文件类型</label>
                 </div>
                 <div class="weui-cell__bd">
                     <div id="typeView"></div>

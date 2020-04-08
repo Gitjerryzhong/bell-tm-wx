@@ -1,9 +1,9 @@
 package cn.edu.bnuz.bell.wx
 
-import grails.testing.gorm.DomainUnitTest
+import grails.testing.services.ServiceUnitTest
 import spock.lang.Specification
 
-class PostInfoSpec extends Specification implements DomainUnitTest<PostInfo> {
+class DegreeEnglishServiceSpec extends Specification implements ServiceUnitTest<DegreeEnglishService>{
 
     def setup() {
     }

@@ -3,7 +3,7 @@ package cn.edu.bnuz.bell
 import grails.testing.web.controllers.ControllerUnitTest
 import spock.lang.Specification
 
-class DelayControllerSpec extends Specification implements ControllerUnitTest<DelayController> {
+class DegreeEnglishControllerSpec extends Specification implements ControllerUnitTest<DegreeEnglishController> {
 
     def setup() {
     }

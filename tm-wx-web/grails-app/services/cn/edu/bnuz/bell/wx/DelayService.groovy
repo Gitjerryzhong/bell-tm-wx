@@ -16,12 +16,14 @@ class DelayService {
     def getUserInfo(String openId) {
         def result = PostInfo.executeQuery'''
 select new map(
+u.openId as openId,
 u.id as userId,
 u.phone as phone1,
 i.phone as phone2,
 i.seal as seal,
 i.sealComment as sealComment,
-i.address as address
+i.address as address,
+i.email as email
 )
 from PostInfo i
 right join i.user u
@@ -36,6 +38,7 @@ where u.openId = :openId
             def stdAbroad = StudentAbroadEto.findById(result[0].userId)
             result[0]['minor'] = stdMinor ? true : false
             result[0]['abroad'] = stdAbroad ? true : false
+            result[0]['grade'] = stdEto?.grade
             return result[0]
         }
         return [:]

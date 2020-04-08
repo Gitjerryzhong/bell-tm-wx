@@ -19,3 +19,13 @@ body {
     font-weight: bold;
     color: #c14646;
 }
+.warning_message {
+    margin-top: 33%;
+    background-color: #E64340;
+    padding: 5px;
+    font-size: 24px;
+    text-align: center;
+    color: #FFF;
+    word-wrap: break-word;
+    word-break: break-all;
+}
