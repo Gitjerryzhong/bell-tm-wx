@@ -95,10 +95,10 @@ setTimeout(function(){
         function(data, status) {
             if (status === 'success') {
                 if (data != null && data.length > 0) {
-                    var html = "<div class=\"weui-cells__title\">其他补考项目</div> \n";
+                    var html = "<div class=\"weui-cells__title title\">其他补考项目</div> \n";
                     var template = "<div class=\"weui-media-box weui-media-box_text\">\n" +
-                        "    <div class=\"weui-cell weui-cell_active\">\n" +
-                        "        ${item.courseName}: ${item.makeUpTime}        \n" +
+                        "    <div>\n" +
+                        "        ${item.courseName}: <strong>${item.makeUpTime}</strong>        \n" +
                         "    </div>\n" +
                         "    <p class=\"weui-media-box__desc\">${item.departmentName} ${item.property} ${item.credit}学分</p>\n" +
                         "</div>";

@@ -1,3 +1,4 @@
+setTimeout(function(){
 var types = [ //{id: 'sl1', label: '毕业生专用成绩单'},
     {id: 'sl2', label: '毕业证明'},
     {id: 'sl3', label: '毕业证明（第二专业）'},
@@ -65,7 +66,7 @@ $.get("/delay/getUserInfo",
             alert("网络错误！");
         }
     });
-
+},100);
 
 $('#ok').on('click', function(event){
     var type =  $("#type").val();

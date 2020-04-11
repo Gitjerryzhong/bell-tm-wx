@@ -29,3 +29,8 @@ body {
     word-wrap: break-word;
     word-break: break-all;
 }
+
+.title {
+    font-weight: bold;
+    color: #d9534f;;
+}

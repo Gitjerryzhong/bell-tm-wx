@@ -48,7 +48,7 @@
 
     <div class="weui-form__control-area">
         <div class="weui-panel weui-panel_access">
-            <div class="weui-panel__hd">需确认补考科目</div>
+            <div class="weui-cells__title title">需确认补考科目</div>
             <div class="weui-panel__bd">
             <g:each in="${list}" status="i" var="item">
                 <div class="weui-media-box weui-media-box_text">
