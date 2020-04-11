@@ -2,6 +2,7 @@ $('#confirm').on('click', function(event){
     var email = $("#email").val();
     var phone = $("#phone").val();
     var list = $("#list").val();
+    console.log(list);
     // 匹配出有几门课
     var regex = /courseId=([^}.]*)/g;
     var ids;
@@ -85,3 +86,39 @@ $('#changePhone').on('click', function(event){
 function onGetCode() {
     getCode($("#sms").val())
 }
+
+setTimeout(function(){
+    $.get("/makeUp/otherMakeUp",
+        {
+            openId: $("#openId").val(),
+        },
+        function(data, status) {
+            if (status === 'success') {
+                if (data != null && data.length > 0) {
+                    var html = "<div class=\"weui-cells__title\">其他补考项目</div> \n";
+                    var template = "<div class=\"weui-media-box weui-media-box_text\">\n" +
+                        "    <div class=\"weui-cell weui-cell_active\">\n" +
+                        "        ${item.courseName}: ${item.makeUpTime}        \n" +
+                        "    </div>\n" +
+                        "    <p class=\"weui-media-box__desc\">${item.departmentName} ${item.property} ${item.credit}学分</p>\n" +
+                        "</div>";
+                    data.forEach(function (item) {
+                        var tooltip = item.makeUpTime;
+                        if (tooltip == null || tooltip === 'null') {
+                            tooltip = item.flag == '1' ? "参加补考" : "不参加补考";
+                        }
+                        html += template.replace("${item.courseName}", item.courseName)
+                            .replace("${item.makeUpTime}", tooltip)
+                            .replace("${item.departmentName}", item.departmentName)
+                            .replace("${item.property}", item.property)
+                            .replace("${item.credit}", item.credit);
+                    });
+                    $('#otherView')[0].innerHTML = html;
+                }
+
+            } else {
+                alert("网络错误！");
+            }
+        }
+    );
+},200);

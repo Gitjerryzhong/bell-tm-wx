@@ -37,7 +37,6 @@ class DelayController {
     }
 
     def getUserInfo(String openId) {
-        println openId
         render(delayService.getUserInfo(openId) as JSON)
     }
 }

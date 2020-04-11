@@ -140,7 +140,7 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 server:
-    port: 80
+    port: 25001
 
 bell:
     orm:

@@ -21,10 +21,10 @@ select new map(
     credit as credit,
     property as property,
     departmentName as departmentName,
-    flag as flag
+    flag as flag,
+    makeUpTime as makeUpTime
 ) from MakeUpEto
-where xn='2019-2020' and xq = '2' and studentId = :userId
-order by courseName
+where xn='2019-2020' and xq = '2' and studentId = :userId and flag = '0'
 ''', [userId: user.id]
         } else {
             return null
@@ -73,6 +73,30 @@ where xn = '2019-2020' and xq = '2' and studentId = :studentId and flag='0' and 
             }
         }
         return 'OK'
+    }
+
+    def other(String openId) {
+        def user = User.findByOpenId(openId)
+        if (user) {
+            MakeUpEto.executeQuery'''
+select new map(
+    xn as xn,
+    xq as xq,
+    studentId as studentId,
+    courseId as courseId,
+    courseName as courseName,
+    credit as credit,
+    property as property,
+    departmentName as departmentName,
+    flag as flag,
+    makeUpTime as makeUpTime
+) from MakeUpEto
+where xn='2019-2020' and xq = '2' and studentId = :userId and flag != '0'
+order by flag
+''', [userId: user.id]
+        } else {
+            return null
+        }
     }
 
 }

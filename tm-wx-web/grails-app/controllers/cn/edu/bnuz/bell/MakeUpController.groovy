@@ -27,4 +27,8 @@ class MakeUpController {
     def save (MakeUpCommand cmd) {
         render ([state: makeUpService.update(cmd)] as JSON)
     }
+
+    def otherMakeUp(String openId) {
+        render (makeUpService.other(openId) as JSON)
+    }
 }

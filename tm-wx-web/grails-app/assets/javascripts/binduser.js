@@ -25,7 +25,7 @@ function bindUser(){
                             $(location).attr('href', '/' + $("#successUrl").val());
                         } else if (data.state === 'DUPLICATE') {
                             alert("你已绑定，无需重复绑定！");
-                            $(location).attr('href', '/success');
+                            $(location).attr('href', '/' + $("#successUrl").val());
                         } else if (data.state === 'FAIL') {
                             alert("用户名密码不正确！");
                         } else {

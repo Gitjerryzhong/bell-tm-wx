@@ -70,13 +70,13 @@
         </div>
         <div class="weui-cell__bd">
             <g:if test="${user.flag != '0'}">
-                ${user.flag == '1' ? "参加补考" : "不参加补考"}
+                ${user.flag == '1' ? "参加考试" : "不参加考试"}
             </g:if>
             <g:else>
                 <select class="weui-select" name="flag" id="flag">
                     <option value="0">未确认</option>
-                    <option value="1">参加补考</option>
-                    <option value="-1">不参加补考</option>
+                    <option value="1">参加考试</option>
+                    <option value="-1">不参加考试</option>
                 </select>
             </g:else>
         </div>

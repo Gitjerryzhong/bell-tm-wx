@@ -13,6 +13,8 @@ class MakeUpEto implements Serializable{
     String credit
     String property
     String departmentName
+    String makeUpTime
+    String grade
 
     static mapping = {
         table       name: 'et_make_up', schema: 'tm_wx'

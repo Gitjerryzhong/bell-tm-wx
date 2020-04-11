@@ -57,16 +57,11 @@
                             <label class="weui-label">${item.courseName}</label>
                         </div>
                         <div class="weui-cell__bd">
-                            <g:if test="${item.flag != '0'}">
-                                ${item.flag == '1' ? "参加补考" : "不参加补考"}
-                            </g:if>
-                            <g:else>
-                                <select class="weui-select" name="flag${i}" id="flag${i}">
-                                    <option value="0,${item.courseId}">未确认</option>
-                                    <option value="1,${item.courseId}">参加补考</option>
-                                    <option value="-1,${item.courseId}">不参加补考</option>
-                                </select>
-                            </g:else>
+                            <select class="weui-select" name="flag${i}" id="flag${i}">
+                                <option value="0,${item.courseId}">未确认</option>
+                                <option value="1,${item.courseId}">参加补考</option>
+                                <option value="-1,${item.courseId}">不参加补考</option>
+                            </select>
                         </div>
                     </div>
                     <p class="weui-media-box__desc">${item.departmentName} ${item.property} ${item.credit}学分</p>
@@ -79,6 +74,7 @@
     <div class="weui-btn-area">
         <input class="weui-btn weui-btn_primary" type="button" value="提交" id="confirm">
     </div>
+    <div id="otherView"></div>
 </g:if>
 <g:else>
     <div class="warning_message">本次线上考试，只针对2016级和往届生，其他年级同学待返校后学校另行组织。</div>
