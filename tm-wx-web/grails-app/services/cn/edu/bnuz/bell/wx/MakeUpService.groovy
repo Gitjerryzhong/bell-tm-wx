@@ -95,7 +95,7 @@ where xn='2019-2020' and xq = '2' and studentId = :userId and flag != '0'
 order by flag
 ''', [userId: user.id]
         } else {
-            return null
+            return [:]
         }
     }
 

@@ -95,7 +95,7 @@ setTimeout(function(){
         function(data, status) {
             if (status === 'success') {
                 if (data != null && data.length > 0) {
-                    var html = "<div class=\"weui-cells__title title\">其他补考项目</div> \n";
+                    var html = "";
                     var template = "<div class=\"weui-media-box weui-media-box_text\">\n" +
                         "    <div>\n" +
                         "        ${item.courseName}: <strong>${item.makeUpTime}</strong>        \n" +
@@ -106,13 +106,25 @@ setTimeout(function(){
                         var tooltip = item.makeUpTime;
                         if (tooltip == null || tooltip === 'null') {
                             tooltip = item.flag == '1' ? "参加补考" : "不参加补考";
+                            html += template.replace("${item.courseName}", item.courseName)
+                                .replace("${item.makeUpTime}", tooltip)
+                                .replace("${item.departmentName}", item.departmentName)
+                                .replace("${item.property}", item.property)
+                                .replace("${item.credit}", item.credit);
                         }
-                        html += template.replace("${item.courseName}", item.courseName)
-                            .replace("${item.makeUpTime}", tooltip)
-                            .replace("${item.departmentName}", item.departmentName)
-                            .replace("${item.property}", item.property)
-                            .replace("${item.credit}", item.credit);
                     });
+                    if (data.some(function(item) { return item.makeUpTime != null; })) {
+                        html += "<div class=\"weui-cells__title title\">其他补考项目</div> \n";
+                        data.forEach(function (item) {
+                            if (item.makeUpTime != null) {
+                                html += template.replace("${item.courseName}", item.courseName)
+                                    .replace("${item.makeUpTime}", item.makeUpTime)
+                                    .replace("${item.departmentName}", item.departmentName)
+                                    .replace("${item.property}", item.property)
+                                    .replace("${item.credit}", item.credit);
+                            }
+                        });
+                    }
                     $('#otherView')[0].innerHTML = html;
                 }
 
