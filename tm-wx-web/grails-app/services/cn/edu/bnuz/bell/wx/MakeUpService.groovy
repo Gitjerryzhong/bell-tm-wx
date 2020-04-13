@@ -36,6 +36,11 @@ where xn='2019-2020' and xq = '2' and studentId = :userId and flag = '0'
         if (!user) {
             return 'FAIL'
         }
+        def activity = Activities.findByName('MAKE UP')
+        def now = new Date()
+        if(activity.start > now || activity.deadline < now) {
+            return 'EXPIRE'
+        }
         def flags = JSON.parse(cmd.flags)
         if (flags && flags.size()) {
             flags.each{

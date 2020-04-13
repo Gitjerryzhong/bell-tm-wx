@@ -34,7 +34,7 @@ $('#confirm').on('click', function(event){
             alert("请正确输入验证码！");
         }
     }
-    var re=/^\w+@[a-z0-9]+\.[a-z]+$/i;
+    var re=/^(?:\w+\.?)*\w+@(?:\w+\.)+\w+$/;
     if ( !email ) {
         alert('请输入Email。');
     } else if (!re.test(email)) {
@@ -42,25 +42,32 @@ $('#confirm').on('click', function(event){
     } else if ( !validPhone ) {
         alert('电话号码不允许空！请输入电话号码。');
     } else {
-        $.post("/makeUp",
-            {
-                openId: $("#openId").val(),
-                phone: validPhone,
-                email: email,
-                flags:   JSON.stringify(flags)
-            },
-            function(data, status) {
-                if (status === 'success') {
-                    if (data.state === 'OK') {
-                        alert("报名成功！");
-                        $(location).attr('href', '/student-menu');
+        if (confirm('温馨提醒：一旦确认，不能再修改！')) {
+            $.post("/makeUp",
+                {
+                    openId: $("#openId").val(),
+                    phone: validPhone,
+                    email: email,
+                    flags:   JSON.stringify(flags)
+                },
+                function(data, status) {
+                    if (status === 'success') {
+                        if (data.state === 'OK') {
+                            alert("报名成功！");
+                            $(location).attr('href', '/student-menu');
+                        } else if (data.state === 'FAIL') {
+                            alert("非法用户！");
+                        } else if (data.state === 'EXPIRE') {
+                            alert("目前不是报名时间，请留意通知！");
+                        } else{
+                            alert("未知错误！");
+                        }
                     } else {
-                        alert("未知错误！");
+                        alert("网络错误！");
                     }
-                } else {
-                    alert("网络错误！");
-                }
-            });
+                });
+        }
+
     }
 });
 
