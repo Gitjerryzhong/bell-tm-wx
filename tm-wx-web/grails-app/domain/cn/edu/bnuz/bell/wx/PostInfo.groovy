@@ -6,6 +6,7 @@ class PostInfo {
     Boolean seal
     String sealComment
     String address
+    String email
     static belongsTo = [user: User]
     static mapping = {
         table schema: 'tm_wx'
@@ -14,9 +15,11 @@ class PostInfo {
         seal comment: '是否密封'
         sealComment type: 'text', comment: '密封要求'
         address type: 'text', comment: '邮寄地址'
+        email type: 'text', comment: 'Email'
     }
     static constraints = {
         user unique: true
         sealComment nullable: true
+        email nullable: true
     }
 }

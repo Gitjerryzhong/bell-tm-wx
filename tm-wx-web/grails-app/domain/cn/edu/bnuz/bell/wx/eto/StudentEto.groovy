@@ -6,6 +6,9 @@ class StudentEto {
     String password
     String enroll
     String atSchool
+    Integer grade
+    String major
+    String department
 
     static mapping = {
         table       name: 'et_student', schema: 'tm_wx'

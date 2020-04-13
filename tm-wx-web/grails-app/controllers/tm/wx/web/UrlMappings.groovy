@@ -27,6 +27,12 @@ class UrlMappings {
         "/score"(resources: 'score', includes: ['index'])
         "/levelExam"(resources: 'levelExam', includes: ['index'])
         "/takeSeat"(resources: 'takeSeat', includes: ['index', 'show'])
+        "/makeUp"(resources: 'makeUp'){
+            collection {
+                "/otherMakeUp"(controller: 'makeUp', action: 'otherMakeUp', method: 'GET')
+            }
+        }
+        "/degreeEnglish"(resources: 'degreeEnglish')
         "/smsValidate"(resources: 'smsValidate', includes: ['index'])
         "/"(resources: 'menu', includes: ['index'])
     }

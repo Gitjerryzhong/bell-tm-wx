@@ -31,6 +31,12 @@ class StudentController {
             case 'delay':
                 backUrl = "${host}/delay"
                 break
+            case 'makeUp':
+                backUrl = "${host}/makeUp"
+                break
+            case 'degreeEnglish':
+                backUrl = "${host}/degreeEnglish"
+                break
             default:
                 render status: HttpStatus.BAD_REQUEST
         }
