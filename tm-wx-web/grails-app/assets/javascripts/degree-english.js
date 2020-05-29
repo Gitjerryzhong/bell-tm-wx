@@ -36,6 +36,10 @@ $('#confirm').on('click', function(event){
                     if (data.state === 'OK') {
                         alert("报名成功！");
                         $(location).attr('href', '/student-menu');
+                    } else if (data.state === 'FAIL') {
+                        alert("用户无此次报名资格！");
+                    } else if (data.state === 'EXPIRE') {
+                        alert("目前不是报名时间，请留意通知！");
                     } else {
                         alert("未知错误！");
                     }
