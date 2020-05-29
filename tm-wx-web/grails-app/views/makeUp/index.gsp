@@ -9,7 +9,7 @@
     <asset:stylesheet src="wechat.css"/>
 </head>
 <body>
-<g:if test="${user.grade <= 2016}">
+<g:if test="${user.grade == 2018}">
     <div class="weui-cell">
         <div class="weui-cell__hd"><labeuserIdl  class="weui-label">学号</labeuserIdl></div>
         <div class="weui-cell__bd">
@@ -77,7 +77,7 @@
     <div id="otherView"></div>
 </g:if>
 <g:else>
-    <div class="warning_message">本次线上考试，只针对2016级和往届生，其他年级同学待返校后学校另行组织。</div>
+    <div class="warning_message">本次线上考试，只针对2018级2+2补考学生。</div>
 </g:else>
     <asset:javascript src="application.js"/>
     <asset:javascript src="makeup.js"/>

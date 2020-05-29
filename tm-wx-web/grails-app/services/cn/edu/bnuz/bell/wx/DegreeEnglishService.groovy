@@ -17,6 +17,9 @@ se.grade as grade,
 se.major as major,
 ee.type as examType,
 ee.flag as flag,
+ee.dateExam as dateExam,
+ee.teacherName as teacherName,
+ee.teacherPhone as teacherPhone,
 u.phone as phone1,
 i.phone as phone2,
 i.email as email
@@ -38,6 +41,11 @@ where u.openId = :openId and se.id = u.id and ee.studentId = u.id
         def degreeEnglish = EnglishExam.findByStudentId(user.id)
         if (!degreeEnglish) {
             return 'FAIL'
+        }
+        def activity = Activities.findByName('DEGREE ENGLISH')
+        def now = new Date()
+        if(activity.start > now || activity.deadline < now) {
+            return 'EXPIRE'
         }
         if (degreeEnglish.flag == '0') {
             degreeEnglish.flag = cmd.flag
