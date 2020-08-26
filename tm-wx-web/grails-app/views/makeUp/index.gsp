@@ -9,7 +9,10 @@
     <asset:stylesheet src="wechat.css"/>
 </head>
 <body>
-<g:if test="${user.grade == 2018}">
+<g:if test="${expire}">
+    <div class="warning_message">当前不是报名时间，请留意通知！</div>
+</g:if>
+<g:elseif test="${permission}">
     <div class="weui-cell">
         <div class="weui-cell__hd"><labeuserIdl  class="weui-label">学号</labeuserIdl></div>
         <div class="weui-cell__bd">
@@ -48,7 +51,7 @@
 
     <div class="weui-form__control-area">
         <div class="weui-panel weui-panel_access">
-            <div class="weui-cells__title title">需确认线上补考科目</div>
+            <div class="weui-cells__title title">需确认补考科目</div>
             <div class="weui-panel__bd">
             <g:each in="${list}" status="i" var="item">
                 <div class="weui-media-box weui-media-box_text">
@@ -70,14 +73,15 @@
             </div>
         </div>
     </div>
-
+    <g:if test="${list != null && list.size() > 0}">
     <div class="weui-btn-area">
         <input class="weui-btn weui-btn_primary" type="button" value="提交" id="confirm">
     </div>
+    </g:if>
     <div id="otherView"></div>
-</g:if>
+</g:elseif>
 <g:else>
-    <div class="warning_message">本次线上考试，只针对2018级2+2补考学生。</div>
+    <div class="warning_message">${message}</div>
 </g:else>
     <asset:javascript src="application.js"/>
     <asset:javascript src="makeup.js"/>

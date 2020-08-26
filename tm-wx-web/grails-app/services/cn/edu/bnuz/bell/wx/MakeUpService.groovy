@@ -24,7 +24,7 @@ select new map(
     flag as flag,
     makeUpTime as makeUpTime
 ) from MakeUpEto
-where xn='2019-2020' and xq = '2' and studentId = :userId and flag = '0'
+where xn='2019-2020' and xq = '2' and studentId = :userId
 ''', [userId: user.id]
         } else {
             return null

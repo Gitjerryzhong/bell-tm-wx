@@ -9,6 +9,10 @@
     <asset:stylesheet src="wechat.css"/>
 </head>
 <body>
+<g:if test="1==1">
+    <div class="warning_message">成绩单等证明材料临时网上申请打印服务已于5月30日关闭。后续如需成绩单等证明材料请联系所在学院协助打印。不便之处，敬请谅解。</div>
+</g:if>
+<g:else>
     <div class="weui-cell">
         <div class="weui-cell__hd"><labeuserIdl  class="weui-label">学号</labeuserIdl></div>
         <div class="weui-cell__bd">
@@ -106,5 +110,7 @@
 
     <asset:javascript src="application.js"/>
     <asset:javascript src="delay.js"/>
+
+</g:else>
 </body>
 </html>
