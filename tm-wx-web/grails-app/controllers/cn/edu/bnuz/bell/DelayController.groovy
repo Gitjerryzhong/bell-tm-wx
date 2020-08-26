@@ -21,7 +21,7 @@ class DelayController {
                 if (user.userId.length() != 10) {
                     render (view: "/message", model: [message: "本功能只提供本校学生使用！"])
                 }
-                return ([user: delayService.getUserInfo(openid), openid: openid, list: delayService.list(openid)])
+//                return ([user: delayService.getUserInfo(openid), openid: openid, list: delayService.list(openid)])
             }
         } else {
             response.sendRedirect("/student?act=bindUser")
