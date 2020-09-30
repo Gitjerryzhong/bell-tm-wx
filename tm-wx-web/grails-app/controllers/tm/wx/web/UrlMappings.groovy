@@ -32,6 +32,11 @@ class UrlMappings {
                 "/otherMakeUp"(controller: 'makeUp', action: 'otherMakeUp', method: 'GET')
             }
         }
+        "/qualifyExam"(resources: 'qualifyExam'){
+            collection {
+                "/getExamInfo"(controller: 'qualifyExam', action: 'getExamInfo', method: 'GET')
+            }
+        }
         "/degreeEnglish"(resources: 'degreeEnglish')
         "/smsValidate"(resources: 'smsValidate', includes: ['index'])
         "/"(resources: 'menu', includes: ['index'])
