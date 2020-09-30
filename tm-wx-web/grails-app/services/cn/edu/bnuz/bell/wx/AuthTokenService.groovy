@@ -63,4 +63,19 @@ order by createdTime desc
             }
         }
     }
+
+    def accessLog(String openId, Boolean isSubscribe) {
+        if (openId) {
+            def log = new AccessLog(
+                    openId: openId,
+                    dateCreated: new Date(),
+                    isSubscribe: isSubscribe
+            )
+            if (!log.save()) {
+                log.errors.each {
+                    println it
+                }
+            }
+        }
+    }
 }

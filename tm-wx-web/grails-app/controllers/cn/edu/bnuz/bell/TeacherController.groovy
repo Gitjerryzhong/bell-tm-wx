@@ -30,6 +30,9 @@ class TeacherController {
             case 'bindNewPhone':
                 backUrl = "${host}/bindNewPhone?userType=1"
                 break
+            case 'qualify':
+                backUrl = "${host}/qualifyExam"
+                break
             default:
                 render status: HttpStatus.BAD_REQUEST
         }
