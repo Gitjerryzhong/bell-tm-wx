@@ -40,7 +40,11 @@ class TakeSeatController {
         } else {
             def examInfo = takeSeatService.getExamInfo(openid)
             if (examInfo) {
-                return examInfo
+                if (examInfo.cetTeacherRooms && examInfo.cetTeacherRooms.size() > 0) {
+                    return examInfo
+                } else {
+                    render view:"/message", model: [message: "您未报名四六级监考！"]
+                }
             } else {
                 response.sendRedirect('/teacher?act=bindCetUser')
             }
