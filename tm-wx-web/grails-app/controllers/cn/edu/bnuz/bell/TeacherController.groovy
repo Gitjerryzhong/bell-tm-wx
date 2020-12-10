@@ -34,7 +34,7 @@ class TeacherController {
                 backUrl = "${host}/qualifyExam"
                 break
             case 'assetView':
-                backUrl = "${host}/assetViewer"
+                backUrl = "${host}/assetViewer/${params.assetId}"
                 break
             default:
                 render status: HttpStatus.BAD_REQUEST

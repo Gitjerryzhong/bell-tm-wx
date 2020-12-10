@@ -2,31 +2,24 @@ package cn.edu.bnuz.bell
 
 import cn.edu.bnuz.bell.wx.AssetViewerService
 import cn.edu.bnuz.bell.wx.AuthService
-import javassist.tools.web.BadHttpRequest
 
 class AssetViewerController {
     AuthService authService
     AssetViewerService assetViewerService
 
-    def index(String code, Long assetId) {
+    def show(String code, Long id) {
         def openid = authService.findOpenId(code)
-        def now = new Date()
         if (!openid) {
-            throw new BadHttpRequest()
-        }
-
-        if(activity.start > now || activity.deadline < now) {
-            render view:"/message", model: [message: "活动已失效！"]
-        } else if (!cmd.row || !cmd.col) {
-            render view:"/message", model: [message: "无座！"]
+            render view:"/message", model: [message: "非法用户！"]
         } else {
-            def result = takeSeatService.save(openid, cmd)
-            if (result == 'FAIL') {
-                response.sendRedirect('/teacher?act=bindUser')
-            } else {
-                render view:"/message", model: [message: "${result}"]
+            if (assetViewerService.hasPermission(openid)) {
+                def asset = assetViewerService.getAssetInfo(id)
+                if (!asset) {
+                    render view:"/message", model: [message: "该设备不存在，请联系系统管理员！"]
+                } else {
+                    return [asset: asset[0], tracks: assetViewerService.getTrack(id)]
+                }
             }
         }
-
     }
 }

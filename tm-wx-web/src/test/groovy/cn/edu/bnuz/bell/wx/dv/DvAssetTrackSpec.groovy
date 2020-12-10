@@ -3,7 +3,7 @@ package cn.edu.bnuz.bell.wx.dv
 import grails.testing.gorm.DomainUnitTest
 import spock.lang.Specification
 
-class AssetSpec extends Specification implements DomainUnitTest<Asset> {
+class DvAssetTrackSpec extends Specification implements DomainUnitTest<DvAssetTrack> {
 
     def setup() {
     }

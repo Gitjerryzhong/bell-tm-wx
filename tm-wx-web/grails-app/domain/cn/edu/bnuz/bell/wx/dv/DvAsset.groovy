@@ -2,7 +2,7 @@ package cn.edu.bnuz.bell.wx.dv
 
 import java.time.LocalDate
 
-class Asset {
+class DvAsset {
     Long id
     String code
     String sn
