@@ -22,7 +22,7 @@ where au.userId = u.id and u.openId = :openId
     }
 
     def getTrack(Long id) {
-        def result = DvAssetTrack.executeQuery'''
+        DvAssetTrack.executeQuery'''
 select new map(
 id as id,
 type as type,
@@ -35,9 +35,5 @@ note as note
 from DvAssetTrack
 where id = :id
 ''', [id: id]
-        result.each{
-            println it.dateApproved
-            println it.source
-        }
     }
 }
