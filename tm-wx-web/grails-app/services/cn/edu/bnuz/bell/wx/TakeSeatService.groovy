@@ -24,8 +24,8 @@ class TakeSeatService {
                 return "${user.name} 老师，您已经占座，请到${seatLabel}就坐"
             }
 
-            // 防止多人抢座
-            if (Seat.findByActivityAndColAndRow(activity, cmd.col, cmd.row)) {
+            // 防止多人抢座，列为999的时候，不捡测座位
+            if (cmd.col != 999 && Seat.findByActivityAndColAndRow(activity, cmd.col, cmd.row)) {
                 return '该位置已经有人，请扫其他座位'
             }
             Seat seat = new Seat(
@@ -36,7 +36,6 @@ class TakeSeatService {
                     dateCreated: new Date()
             )
             seat.save()
-
             return "${user.name} 老师，您的座位是：${getSeatLabel(seat.row, seat.col, activity.groups)}"
         } else {
             return 'FAIL'
@@ -98,6 +97,9 @@ where ct.id = :id
     }
 
     static getSeatLabel(Integer row, Integer col, String groupsString = null) {
+        if (col == 999) {
+            return '随机座位'
+        }
         def label = "${row}排${col}列"
         if (groupsString) {
             def groups = groupsString.split(',')
