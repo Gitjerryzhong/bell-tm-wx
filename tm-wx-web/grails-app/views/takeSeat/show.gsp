@@ -11,7 +11,6 @@
 <body>
     <div class="page__bd">
     <article class="weui-article">
-        <g:if test="cetTeacherRooms != null">
         <p>监考培训时间：请您于<strong>${trainingConfig.time1}</strong>前至<strong>${trainingConfig.place1}</strong>参加监考员培训会。</p>
         <p class="warning">本次培训会采用微信扫码签到，请务必携带手机参加。</p>
         <g:if test="${seat !=null}">
@@ -33,10 +32,6 @@
         <p>因故无法参加下午培训会的，请于<span class="warning">${trainingConfig.time2}</span>到<span class="warning">${trainingConfig.place2}</span>参加第二场培训会。</p>
         <p>严禁监考人员在考点内违规携带或使用通讯、摄像等电子工具。</p>
         <p>根据财务处规定，本次CET监考费将发至下月工资卡中，请注意查收。如有疑问，请咨询教务处。</p>
-        </g:if>
-        <g:else>
-            <div class="warning_message">您未参加此次四六级监考！</div>
-        </g:else>
     </article>
     </div>
 </body>
