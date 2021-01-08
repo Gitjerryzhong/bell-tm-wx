@@ -42,18 +42,5 @@ where id = :id
 
     def getChangeLog(Long id) {
         DvAssetChangeLog.executeQuery("from DvAssetChangeLog where assetId = :id", [id: id])
-//        DvAssetChangeLog.executeQuery'''
-//select new map(
-//id as id,
-//assetId as assetId,
-//brand as brand,
-//name as name,
-//parameter as parameter,
-//dateCreated as dateCreated,
-//sake as sake
-//)
-//from DvAssetChangeLog
-//where assetId = :assetId
-//''', [assetId: id]
     }
 }
