@@ -104,17 +104,35 @@
             </div>
         </div>
     </div>
-    <div class="weui_cells_title">资产流转足迹</div>
-    <div class="weui-cells">
-    <g:each in="${tracks}" var="item">
-        <div class="weui-cell">
-            <div class="weui-cell__hd"><label class="weui-label">${item.dateApproved}</label></div>
-            <div class="weui-cell__bd">
-                ${item.operator} 从${item.source} ${item.type}(原状态：${item.state}
+    <g:if test="${tracks && tracks.length > 0}">
+        <div class="weui_cells_title">资产流转足迹</div>
+        <div class="weui-cells">
+        <g:each in="${tracks}" var="item">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">${item.dateApproved}</label></div>
+                <div class="weui-cell__bd">
+                    ${item.operator} 从${item.source} ${item.type}(原状态：${item.state}
+                </div>
             </div>
+        </g:each>
         </div>
-    </g:each>
-    </div>
-
+    </g:if>
+    <g:if test="${changeLog}">
+        <div class="weui_cells_title">变更日志</div>
+        <div class="weui-cells">
+            <g:each in="${changeLog}" var="log">
+                <div class="weui-cell">
+                    <div class="weui-cell__hd"><label class="weui-label">${log.dateCreated}</label></div>
+                    <div class="weui-cell__bd">
+                        原品牌：${log.brand}<br>
+                        原型号：${log.specs}<br>
+                        原参数：${log.parameter}<br>
+                        原供应商：${log.supplier}<br>
+                        变更原因：${log.sake}
+                    </div>
+                </div>
+            </g:each>
+        </div>
+    </g:if>
 </body>
 </html>

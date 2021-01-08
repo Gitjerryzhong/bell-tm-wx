@@ -17,7 +17,10 @@ class AssetViewerController {
                 if (!asset) {
                     render view:"/message", model: [message: "该设备不存在，请联系系统管理员！"]
                 } else {
-                    return [asset: asset[0], tracks: assetViewerService.getTrack(id)]
+                    return [asset: asset[0],
+                            tracks: assetViewerService.getTrack(id),
+                            changeLog: assetViewerService.getChangeLog(id)
+                    ]
                 }
             }
         }
