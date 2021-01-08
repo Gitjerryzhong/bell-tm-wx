@@ -1,8 +1,11 @@
 package cn.edu.bnuz.bell.wx
 
 import cn.edu.bnuz.bell.wx.dv.DvAsset
+import cn.edu.bnuz.bell.wx.dv.DvAssetChangeLog
+
 import cn.edu.bnuz.bell.wx.dv.DvAssetTrack
 import cn.edu.bnuz.bell.wx.dv.DvAssetUser
+import grails.converters.JSON
 import grails.gorm.transactions.Transactional
 
 @Transactional
@@ -35,5 +38,9 @@ note as note
 from DvAssetTrack
 where id = :id
 ''', [id: id]
+    }
+
+    def getChangeLog(Long id) {
+        DvAssetChangeLog.executeQuery("from DvAssetChangeLog where assetId = :id", [id: id])
     }
 }

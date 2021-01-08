@@ -10,8 +10,8 @@
 <body>
 <g:if test="${openid}">
     <div class="weui-cell">
-        <div class="weui-cell__hd"><label  class="weui-label">考生号</label></div>
-            <input class="weui-input" id="examId" type="number" placeholder="请输入考生号"/>
+        <div class="weui-cell__hd"><label  class="weui-label">准考证号</label></div>
+            <input class="weui-input" id="examId" type="number" placeholder="请输入准考证号"/>
         <div class="weui-cell__bd">
         </div>
     </div>

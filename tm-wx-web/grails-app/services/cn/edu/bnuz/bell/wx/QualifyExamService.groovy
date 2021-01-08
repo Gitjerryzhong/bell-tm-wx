@@ -22,7 +22,7 @@ where student.examTime = room.examTime
 and student.roomId = room.roomNum
 and student.type = room.type
 and student.examId = :examId
-and  substring(student.idNum, 13, 6) = :password
+and  upper(substring(student.idNum, 13, 6)) = upper(:password)
 ''', [examId: examId, password: password]
         return result ? result[0] : [:]
     }
