@@ -6,6 +6,8 @@ import cn.edu.bnuz.bell.wx.BindUserService
 import cn.edu.bnuz.bell.wx.DelayService
 import grails.converters.JSON
 
+import java.time.LocalDate
+
 class DelayController {
     AuthService authService
     BindUserService bindUserService
@@ -21,7 +23,11 @@ class DelayController {
                 if (user.userId.length() != 10) {
                     render (view: "/message", model: [message: "本功能只提供本校学生使用！"])
                 }
-//                return ([user: delayService.getUserInfo(openid), openid: openid, list: delayService.list(openid)])
+                return ([user: delayService.getUserInfo(openid),
+                         openid: openid,
+                         list: delayService.list(openid),
+                         expire: LocalDate.now().isAfter(LocalDate.parse('2021-02-05'))
+                ])
             }
         } else {
             response.sendRedirect("/student?act=bindUser")
