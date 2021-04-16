@@ -1,18 +1,37 @@
 package cn.edu.bnuz.bell.wx
 
+import cn.edu.bnuz.bell.wx.dv.AssetCart
 import cn.edu.bnuz.bell.wx.dv.DvAsset
 import cn.edu.bnuz.bell.wx.dv.DvAssetChangeLog
 
 import cn.edu.bnuz.bell.wx.dv.DvAssetTrack
 import cn.edu.bnuz.bell.wx.dv.DvAssetUser
-import grails.converters.JSON
 import grails.gorm.transactions.Transactional
+import javassist.tools.web.BadHttpRequest
 
 @Transactional
 class AssetViewerService {
 
-    def getAssetInfo(Long id) {
-        DvAsset.executeQuery("from DvAsset where id = :id", [id: id])
+    def getAssetInfo(Long id, String openid) {
+        DvAsset asset = DvAsset.get(id)
+        if (asset) {
+            def user = User.findByOpenId(openid)
+            if (user?.id?.length() != 5) {
+                throw new BadHttpRequest()
+            }
+            if (!AssetCart.findByAssetIdAndNameIsNull(id)) {
+                AssetCart cart = new AssetCart(
+                        assetId: asset.id,
+                        userId: user.id
+                )
+                if (!cart.save()) {
+                    cart.errors.each {
+                        println it
+                    }
+                }
+            }
+        }
+        return asset
     }
 
     Boolean hasPermission(String openId) {

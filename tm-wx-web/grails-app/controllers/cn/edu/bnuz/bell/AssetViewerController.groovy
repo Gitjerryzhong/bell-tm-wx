@@ -13,11 +13,11 @@ class AssetViewerController {
             render view:"/message", model: [message: "非法用户！"]
         } else {
             if (assetViewerService.hasPermission(openid)) {
-                def asset = assetViewerService.getAssetInfo(id)
+                def asset = assetViewerService.getAssetInfo(id, openid)
                 if (!asset) {
                     render view:"/message", model: [message: "该设备不存在，请联系系统管理员！"]
                 } else {
-                    return [asset: asset[0],
+                    return [asset: asset,
                             tracks: assetViewerService.getTrack(id),
                             changeLog: assetViewerService.getChangeLog(id)
                     ]
