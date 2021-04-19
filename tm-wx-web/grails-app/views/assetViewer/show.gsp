@@ -104,7 +104,7 @@
             </div>
         </div>
     </div>
-    <g:if test="${tracks && tracks.length > 0}">
+    <g:if test="${tracks && (tracks.size() > 0)}">
         <div class="weui_cells_title">资产流转足迹</div>
         <div class="weui-cells">
         <g:each in="${tracks}" var="item">
