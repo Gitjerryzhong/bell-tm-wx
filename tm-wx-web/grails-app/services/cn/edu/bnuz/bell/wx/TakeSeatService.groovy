@@ -2,6 +2,7 @@ package cn.edu.bnuz.bell.wx
 
 import cn.edu.bnuz.bell.cmd.SeatCommand
 import cn.edu.bnuz.bell.wx.dv.DvUser
+import cn.edu.bnuz.bell.wx.eto.CetArrange
 import grails.gorm.transactions.Transactional
 import javassist.tools.web.BadHttpRequest
 
@@ -63,30 +64,48 @@ order by seat.dateCreated desc
 ''', [openId: openId], [max: 1]
 
             // 查询所监考考场
-            def cetTeacherRooms = CetTeacherRoom.executeQuery'''
+            def cetTeacherRooms = CetArrange.executeQuery'''
 select new map(
-   ct.name as teacherName,
-   e.name as examName,
-   er.name as roomName,
-   er.id as roomId,
-   er.place as roomPlace,
-   e.examTime as examTime,
-   e.paperTime as paperTime,
-   g.place as groupPlace,
-   c.phone as captainPhone
+    ca.teacher1 as teacher1,
+    ca.phone1 as phone1,
+    ca.teacher2 as teacher2,
+    ca.phone2 as phone2,
+    ca.examName as examName,
+    ca.examPlace as roomPlace,
+    ca.groupPlace as  groupPlace,
+    ca.captainPhone as captainPhone,
+    ca.roomName as roomName,
+    e.paperTime as paperTime,
+    e.examTime as examTime
 )
-from CetTeacherRoom ctr
-join ctr.cetTeacher ct
-join ctr.examRoom er
-join er.exam e
-join er.group g
-join g.captain c
-where ct.id = :id
-''', [id: user.id]
+from CetArrange ca, Exam e
+where ca.examName = e.name and (ca.phone1 = :phone or ca.phone2 = :phone)
+''', [phone: user.phone]
+//            def cetTeacherRooms = CetTeacherRoom.executeQuery'''
+//select new map(
+//   ct.name as teacherName,
+//   e.name as examName,
+//   er.name as roomName,
+//   er.id as roomId,
+//   er.place as roomPlace,
+//   e.examTime as examTime,
+//   e.paperTime as paperTime,
+//   g.place as groupPlace,
+//   c.phone as captainPhone
+//)
+//from CetTeacherRoom ctr
+//join ctr.cetTeacher ct
+//join ctr.examRoom er
+//join er.exam e
+//join er.group g
+//join g.captain c
+//where ct.id = :id
+//''', [id: user.id]
             cetTeacherRooms.each { entry ->
-                def other = CetTeacherRoom.findByExamRoomAndCetTeacherNotEqual(ExamRoom.load(entry.roomId), user).cetTeacher
-                entry['otherTeacherName'] = other.name
-                entry['otherTeacherPhone'] = other.phone
+//                def other = CetTeacherRoom.findByExamRoomAndCetTeacherNotEqual(ExamRoom.load(entry.roomId), user).cetTeacher
+                entry['otherTeacherName'] = entry.phone1 == user.phone ? entry.teacher2 : entry.teacher1
+                entry['otherTeacherPhone'] = entry.phone1 == user.phone ? entry.phone2 : entry.phone1
+                entry['teacherName'] = entry.phone1 == user.phone ? entry.teacher1 : entry.teacher2
             }
             return [seat: seat ? getSeatLabel(seat[0].row, seat[0].col, seat[0].groups) : null,
                     cetTeacherRooms: cetTeacherRooms,
