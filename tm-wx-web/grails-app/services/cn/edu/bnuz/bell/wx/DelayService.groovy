@@ -39,6 +39,7 @@ where u.openId = :openId
             result[0]['minor'] = stdMinor ? true : false
             result[0]['abroad'] = stdAbroad ? true : false
             result[0]['grade'] = stdEto?.grade
+            result[0]['graduation'] = stdEto?.graduation
             return result[0]
         }
         return [:]
@@ -84,6 +85,8 @@ where u.openId = :openId
     }
 
     def list(String openId) {
+        def date = LocalDate.now()
+        def lastSaturday = date.plusDays(-(date.dayOfWeek.value + 1))
         Report.executeQuery'''
 select new map(
 r.id as id,
@@ -94,8 +97,9 @@ to_char(r.dateCreated, 'YYYY-MM-DD') = to_char(now(), 'YYYY-MM-DD') as removeAbl
 from Report r
 join r.user u 
 where u.openId = :openId
+and r.dateCreated > to_date(:lastSaturday, 'YYYY-MM-DD')  
 order by r.type, r.id
-''', [openId: openId]
+''', [openId: openId, lastSaturday: lastSaturday.toString()]
     }
 
     def remove(String openId, Long id) {

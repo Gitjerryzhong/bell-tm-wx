@@ -26,7 +26,7 @@ class DelayController {
                 return ([user: delayService.getUserInfo(openid),
                          openid: openid,
                          list: delayService.list(openid),
-                         expire: LocalDate.now().isAfter(LocalDate.parse('2021-02-05'))
+                         expire: LocalDate.now().isBefore(LocalDate.parse('2021-08-27'))
                 ])
             }
         } else {

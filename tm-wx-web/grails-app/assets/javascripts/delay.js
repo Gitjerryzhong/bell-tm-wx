@@ -15,7 +15,8 @@ var types = [ //{id: 'sl1', label: '毕业生专用成绩单'},
     {id: 'sl14', label: '中文成绩单（主修）'},
     {id: 'sl15', label: '4分制成绩单（合作办学）'},
     {id: 'sl16', label: 'CET4等级成绩证明'},
-    {id: 'sl17', label: 'CET6等级成绩证明'}];
+    {id: 'sl17', label: 'CET6等级成绩证明'},
+    {id: 'sl18', label: '学士学位证明（辅修）'}];
 var template = "<option value=\"${typeLabel}\">${typeLabel}</option>\n";
 $.get("/delay/getUserInfo",
     {
@@ -33,14 +34,14 @@ $.get("/delay/getUserInfo",
                 } else if (item.label.indexOf('合作办学') >= 0) {
                     if (data.abroad) {
                         selectAble = true;
-                        if (item.label === '在校证明（合作办学）') {
-                            if (!data.atSchool) {
-                                selectAble = false;
-                            }
-                        }
+                        // if (item.label === '在校证明（合作办学）') {
+                        //     if (!data.atSchool) {
+                        //         selectAble = false;
+                        //     }
+                        // }
                     }
                 } else if (item.label.indexOf('毕业') >= 0) {
-                    if (!data.atSchool) {
+                    if (data.graduation==='毕业') {
                         selectAble = true;
                     }
                 } else if (item.label === '在校证明' || item.label === '假期证明') {
