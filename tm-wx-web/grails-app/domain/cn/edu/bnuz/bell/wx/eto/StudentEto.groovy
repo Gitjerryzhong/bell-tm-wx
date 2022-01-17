@@ -9,6 +9,7 @@ class StudentEto {
     Integer grade
     String major
     String department
+    String graduation
 
     static mapping = {
         table       name: 'et_student', schema: 'tm_wx'

@@ -10,7 +10,7 @@
 </head>
 <body>
 <g:if test="${expire}">
-    <div class="warning_message">成绩单等证明材料网上申请打印服务已于2021年2月6日关闭。详情请查看公众号《关于寒假期间办理成绩单等证明文件时间的通知》。不便之处，敬请谅解。</div>
+    <div class="warning_message">成绩单等证明材料网上申请打印（邮寄）服务时间：${dateRange.lowerDate} 至 ${dateRange.upperDate}</div>
 </g:if>
 <g:else>
     <div class="weui-cell">

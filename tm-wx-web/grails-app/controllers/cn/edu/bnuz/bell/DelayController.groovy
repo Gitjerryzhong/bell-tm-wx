@@ -23,10 +23,12 @@ class DelayController {
                 if (user.userId.length() != 10) {
                     render (view: "/message", model: [message: "本功能只提供本校学生使用！"])
                 }
+                def dateRange = delayService.getDateRange('DELAY')
                 return ([user: delayService.getUserInfo(openid),
                          openid: openid,
                          list: delayService.list(openid),
-                         expire: LocalDate.now().isAfter(LocalDate.parse('2021-02-05'))
+                         expire: LocalDate.now().isBefore(dateRange.lowerDate) || LocalDate.now().isAfter(dateRange.upperDate),
+                         dateRange: dateRange
                 ])
             }
         } else {
