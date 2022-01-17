@@ -161,4 +161,8 @@ where r.dateCreated between to_date(:lastSaturday, 'YYYY-MM-DD') and to_date(:da
 ''', [userId: userId, lastSaturday: lastSaturday.toString(), date: date.toString()]
     }
 
+    def getDateRange(String business) {
+        TimeConfig.findByBussinees(business)
+    }
+
 }

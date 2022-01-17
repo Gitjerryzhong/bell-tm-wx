@@ -10,7 +10,7 @@
 </head>
 <body>
 <g:if test="${expire}">
-    <div class="warning_message">成绩单等证明材料网上申请打印（邮寄）服务将于2021年7月17日开通。</div>
+    <div class="warning_message">成绩单等证明材料网上申请打印（邮寄）服务时间：${dateRange.lowerDate} 至 ${dateRange.upperDate}</div>
 </g:if>
 <g:else>
     <div class="weui-cell">
